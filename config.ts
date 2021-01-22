@@ -1,24 +1,11 @@
-import { Router } from 'https://deno.land/x/oak@v6.4.2/mod.ts';
-import {
-  getUser,
-  getUsers,
-  addUser,
-  updateUser,
-  deleteUser,
-} from './controller/user.ts'
+import "https://deno.land/x/dotenv/load.ts";
 
+const PORT = Deno.env.get('PORT') || 3333;
+const DB_HOST = Deno.env.get('MONGO_URL') || "mongodb://localhost:27017";
+const DB_NAME = Deno.env.get('DATABASE_NAME') || "denoapi";
 
-
-const router = new Router();
-
-router.get("/", (ctx) => {
-  ctx.response.body = "Hello Deno!"
-});
-
-router.get("./users", getUsers);
-router.get("./user/:id", getUser);
-router.post("./user/", addUser);
-router.put("./user/:id", updateUser);
-router.delete("./user/:id", deleteUser);
-
-export default router;
+export {
+    PORT,
+    DB_HOST,
+    DB_NAME,
+};
